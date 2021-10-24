@@ -1,0 +1,41 @@
+buildscript { // 플러그인 의존성 관리를 위한 설정
+    ext { // build.gradle에서 사용하는 전역변수를 설정하겠다는 의미
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // 플러그인 사용
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+// 앞서 선언한 플러그인 의존성들을 적용할 것인지를 결정하는 코드
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management' // 요 플러그인은 스프링 부트의 의존성들을 관리해주는 플러그인이라 꼭 추가.
+
+//plugins { 위에 코드랑 같은 역할
+//    id 'java'
+//}
+
+group 'com.spring.wednes'
+version '1.0-SNAPSHOT'
+
+repositories { // 각종 의존성들을 어떤 원격 저자옷에서 받을지를 정한다
+    mavenCentral()
+}
+
+dependencies {
+    // 7버전에서는 compile, testComplie 대신 implementataion, testImplementation을 사용
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
