@@ -30,10 +30,14 @@ repositories { // 각종 의존성들을 어떤 원격 저자옷에서 받을지
 
 dependencies {
     // 7버전에서는 compile, testComplie 대신 implementataion, testImplementation을 사용
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.6'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.6'
+    testImplementation ('org.junit.jupiter:junit-jupiter-api:5.8.1') {
+        exclude module: 'junit-platform-commons'
+    }
+    testRuntimeOnly 'org.junit.platform:junit-platform-engine:1.8.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-commons:1.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
 test {
